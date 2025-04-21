@@ -1,0 +1,13 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    Note right of browser: Usuario escribe y envía formulario
+    browser->>server: POST /exampleapp/new_note_spa
+    activate server
+    Note over browser: Content-Type: application/json<br>{content: "nueva nota", date: "..."}
+    Note left of server: Agrega nota a data.json
+    server-->>browser: HTTP 201 (JSON con nueva nota)
+    deactivate server
+
+    Note right of browser: Actualiza DOM localmente<br>sin recargar página

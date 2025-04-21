@@ -1,0 +1,33 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    Note right of browser: Usuario escribe texto y hace clic en Save
+    browser->>server: POST /exampleapp/new_note
+    activate server
+    Note left of server: Guarda nueva nota en data.json
+    server-->>browser: HTTP 302 (Redirect a /exampleapp/notes)
+    deactivate server
+
+    browser->>server: GET /exampleapp/notes
+    activate server
+    server-->>browser: HTML document
+    deactivate server
+
+    browser->>server: GET /exampleapp/main.css
+    activate server
+    server-->>browser: CSS file
+    deactivate server
+
+    browser->>server: GET /exampleapp/main.js
+    activate server
+    server-->>browser: JavaScript file
+    deactivate server
+
+    Note right of browser: Ejecuta JS y solicita datos actualizados
+    browser->>server: GET /exampleapp/data.json
+    activate server
+    server-->>browser: JSON con nueva nota incluida
+    deactivate server
+
+  
